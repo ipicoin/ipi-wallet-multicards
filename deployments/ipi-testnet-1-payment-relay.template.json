@@ -21,6 +21,8 @@
     "all_configs_match": null,
     "recipient_delta_matches": null,
     "all_relay_balances_zero": null,
-    "five_public_route_events_verified": null
+    "five_public_route_events_verified": null,
+    "wallet_payment_verified": null,
+    "pokedex_trace_verified": null
   }
 }

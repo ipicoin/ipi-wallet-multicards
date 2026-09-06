@@ -101,9 +101,9 @@ vault, controller, exact route, recipient and amount.
 
 This is not anonymity. It prevents a basic merchant interface from receiving
 the high-value vault as the immediate bank sender, while leaving the full route
-transparent to explorers, analysts and the sibling `ipi-deanonimizer` tool.
-Anyone capable of reading public chain data can trace it; no privileged tracing
-backdoor exists.
+transparent to explorers, analysts and the read-only **Deanonimizer** tab built
+into `ipi-pokedex`. Anyone capable of reading public chain data can trace it;
+no privileged tracing backdoor exists.
 
 ## Build and verification
 
