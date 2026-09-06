@@ -5,6 +5,11 @@ operatora albo agenta działającego na serwerze noda. Celem jest zapisanie kodu
 `ipi-card-vault` na `ipi-testnet-1`, zweryfikowanie go na łańcuchu i zwrócenie
 `code_id` do konfiguracji IPI Wallet.
 
+Ta procedura dotyczy wyłącznie Testnetu. Po migracji IPI do Mainnetu kontrakt
+musi zostać ponownie zweryfikowany i zapisany na Mainnecie z serwera noda,
+zgodnie z bramką opisaną w `README.md`. Nie wolno zastępować samych nazw sieci
+w poniższych komendach ani używać testnetowego `code_id` na Mainnecie.
+
 ## Oczekiwany rezultat
 
 Serwer ma zwrócić pięć wartości:
@@ -219,7 +224,7 @@ dla kodu jest `Everybody`.
 ## 4. Obowiązkowy smoke test na łańcuchu
 
 Testowa instancja ma powstać bez administratora i bez środków. Flaga w typowej
-binarnce wasmd nazywa się `--no-admin`; przed użyciem potwierdzić ją przez
+binarce wasmd nazywa się `--no-admin`; przed użyciem potwierdzić ją przez
 `tx wasm instantiate --help`.
 
 ```sh
@@ -305,7 +310,7 @@ npm start
 ```
 
 Jeżeli aplikacja jest uruchamiana jako usługa, ustawić tę samą zmienną w
-  kontrolowanym środowisku usługi i zrestartować wyłącznie aplikację portfela.
+kontrolowanym środowisku usługi i zrestartować wyłącznie aplikację portfela.
 Nie zmieniać konfiguracji noda.
 
 ## 6. Test użytkowy dwóch kart
