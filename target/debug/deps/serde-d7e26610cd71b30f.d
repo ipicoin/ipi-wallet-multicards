@@ -1,0 +1,14 @@
+/work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/deps/libserde-d7e26610cd71b30f.rmeta: /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/build/serde-76254d604ad9407a/out/private.rs
+
+/work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/deps/libserde-d7e26610cd71b30f.rlib: /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/build/serde-76254d604ad9407a/out/private.rs
+
+/work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/deps/serde-d7e26610cd71b30f.d: /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/build/serde-76254d604ad9407a/out/private.rs
+
+/tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/tmp/ipi-cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/build/serde-76254d604ad9407a/out/private.rs:
+
+# env-dep:OUT_DIR=/work/ipi/phisical/ipi-wallet/contracts/ipi-card-vault/target/debug/build/serde-76254d604ad9407a/out

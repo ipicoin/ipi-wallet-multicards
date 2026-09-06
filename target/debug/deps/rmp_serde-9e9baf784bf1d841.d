@@ -1,0 +1,12 @@
+/work/ipi/phisical/ipi-wallet-multicards/target/debug/deps/rmp_serde-9e9baf784bf1d841.d: /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/lib.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/bytes.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/config.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/decode.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/encode.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/../README.md
+
+/work/ipi/phisical/ipi-wallet-multicards/target/debug/deps/librmp_serde-9e9baf784bf1d841.rlib: /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/lib.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/bytes.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/config.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/decode.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/encode.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/../README.md
+
+/work/ipi/phisical/ipi-wallet-multicards/target/debug/deps/librmp_serde-9e9baf784bf1d841.rmeta: /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/lib.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/bytes.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/config.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/decode.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/encode.rs /home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/../README.md
+
+/home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/lib.rs:
+/home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/bytes.rs:
+/home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/config.rs:
+/home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/decode.rs:
+/home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/encode.rs:
+/home/przem/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rmp-serde-1.3.1/src/../README.md:
