@@ -2,7 +2,7 @@
 name = "ipi-card-vault"
 version = "0.2.0"
 edition = "2021"
-license-file = "../LICENSE"
+license = "Apache-2.0"
 description = "One-of-N IPI Card vault for CosmWasm"
 
 [lib]

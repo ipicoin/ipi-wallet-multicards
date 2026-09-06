@@ -1,52 +1,52 @@
 <p align="center">
-  <a href="#ipi-card-vault--wspólny-portfel-wielu-kart"><img src="docs/assets/multicards-mark.svg" width="208" alt="Kilka fizycznych kart IPI połączonych z jednym skarbcem"></a>
+  <a href="#ipi-card-vault--shared-wallet-for-multiple-cards"><img src="docs/assets/multicards-mark.svg" width="208" alt="Several physical IPI cards connected to a single vault"></a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="#ipi-payment-relay--pięcioetapowe-przekazanie-płatności"><img src="docs/assets/privacy-relay-mark.svg" width="208" alt="Zanonimizowana postać otoczona pięcioma przekaźnikami płatności"></a>
+  <a href="#ipi-payment-relay--five-hop-payment-forwarding"><img src="docs/assets/privacy-relay-mark.svg" width="208" alt="An anonymized figure surrounded by five payment relays"></a>
 </p>
 
 <h1 align="center">IPI Wallet Multicards</h1>
 
 <p align="center">
-  <strong>Wiele kart. Jeden skarbiec. Pięć przekaźników.</strong><br>
-  Gotowe kontrakty CosmWasm dla współdzielonego portfela IPI Wallet.
+  <strong>Multiple cards. One vault. Five relays.</strong><br>
+  Deployment-ready CosmWasm contracts for the shared IPI Wallet.
 </p>
 
 ---
 
-`ipi-wallet-multicards` jest repozytorium kontraktów CosmWasm używanych przez
-IPI Wallet do obsługi jednego portfela przez wiele fizycznych kart oraz do
-przekazywania płatności przez warstwę pięciu przekaźników.
+`ipi-wallet-multicards` is a repository of CosmWasm contracts used by IPI
+Wallet to operate a single wallet through multiple physical cards and to
+forward payments through a layer of five relays.
 
-Repozytorium zawiera kod źródłowy obu kontraktów, zablokowane wersje zależności,
-testy, dane wdrożeniowe oraz gotowe, zoptymalizowane artefakty Wasm z sumami
-kontrolnymi. Nie zawiera aplikacji desktopowej, oprogramowania kart ani procesu
-wydawania kart. Nie jest też usługą serwerową: operator zapisuje artefakt w
-wybranym łańcuchu, a kontrakt działa później bezpośrednio w tym łańcuchu.
-Aplikacja `ipi-wallet` korzysta ze zweryfikowanego, osobnego dla każdej sieci
+The repository contains the source code of both contracts, locked dependency
+versions, tests, deployment records, and ready-to-use optimized Wasm artifacts
+with checksums. It does not contain the desktop application, card firmware, or
+the card issuance process. It is not a server-side service either: an operator
+stores an artifact on a selected chain, after which the contract runs directly
+on that chain. The `ipi-wallet` application uses a verified, network-specific
 `code_id`.
 
-> **Status bezpieczeństwa:** to nieaudytowane oprogramowanie laboratoryjne.
-> Nie powinno chronić środków o istotnej wartości.
+> **Security status:** this is unaudited laboratory software. It should not be
+> used to protect funds of significant value.
 
-## Co znajduje się w repozytorium
+## Repository contents
 
-| Element | Plik | Rozmiar | SHA-256 |
+| Component | File | Size | SHA-256 |
 | --- | --- | ---: | --- |
 | IPI Card Vault | `contracts/multicarding/ipi_card_vault.wasm` | 228947 B | `fcb5a4653163ca4e3613390bb93c009da1fc49541db21bb11fdea5f64bfec454` |
 | IPI Payment Relay | `contracts/anonymization/ipi_payment_relay.wasm` | 236954 B | `3ce3c4124544daf100f483110be4c5c9093d4f035fe14259bd2e3ceaef761553` |
 
-Najważniejsze katalogi:
+Key directories:
 
 ```text
 card-vault/
 ├── Cargo.toml
-└── src/                     # źródła IPI Card Vault
+└── src/                     # IPI Card Vault source code
 payment-relay/
 ├── Cargo.toml
-├── src/                     # źródła IPI Payment Relay
-└── tests/                   # testy integracyjne pełnej trasy
-Cargo.toml                   # wspólny workspace obu kontraktów
-Cargo.lock                   # wspólna blokada zależności
+├── src/                     # IPI Payment Relay source code
+└── tests/                   # full-route integration tests
+Cargo.toml                   # shared workspace for both contracts
+Cargo.lock                   # shared dependency lockfile
 contracts/
 ├── multicarding/
 │   ├── ipi_card_vault.wasm
@@ -54,25 +54,25 @@ contracts/
 └── anonymization/
     ├── ipi_payment_relay.wasm
     └── checksums.txt
-deployments/                 # zapisane i szablonowe dane wdrożeń
+deployments/                 # recorded and template deployment data
 ```
 
-Integralność plików należy sprawdzić przed każdym wdrożeniem:
+Verify file integrity before every deployment:
 
 ```sh
 (cd contracts/multicarding && sha256sum --check checksums.txt)
 (cd contracts/anonymization && sha256sum --check checksums.txt)
 ```
 
-Nie wolno wdrażać artefaktu, jeżeli jego suma jest inna. Artefakty zbudowano
-dla CosmWasm 2.x. Sieć docelowa musi obsługiwać `cosmwasm_2_0`, natywny nominał
-`aipi`, wiadomości protobuf `Any` oraz moduł `feegrant`.
+Do not deploy an artifact if its checksum differs. The artifacts were built for
+CosmWasm 2.x. The target network must support `cosmwasm_2_0`, the native `aipi`
+denomination, protobuf `Any` messages, and the `feegrant` module.
 
-## Budowanie i testy
+## Building and testing
 
-Projekt korzysta z Rust `1.85.0`, wskazanego w `rust-toolchain.toml`. Oba
-kontrakty są równorzędnymi pakietami jednego workspace i można je sprawdzić
-niezależnie:
+The project uses Rust `1.85.0`, as specified in `rust-toolchain.toml`. Both
+contracts are peer packages in a single workspace and can be checked
+independently:
 
 ```sh
 cargo test --locked -p ipi-card-vault
@@ -81,52 +81,53 @@ cargo clippy --locked -p ipi-card-vault --all-targets -- -D warnings
 cargo clippy --locked -p ipi-payment-relay --all-targets -- -D warnings
 ```
 
-CI dodatkowo buduje oba cele `wasm32-unknown-unknown`, odtwarza zoptymalizowane
-artefakty przy użyciu `cosmwasm/optimizer:0.16.1` i porównuje ich bajty z
-plikami w `contracts/`.
+CI also builds both `wasm32-unknown-unknown` targets, reproduces the optimized
+artifacts with `cosmwasm/optimizer:0.16.1`, and compares their bytes with the
+files in `contracts/`.
 
-## IPI Card Vault — wspólny portfel wielu kart
+## IPI Card Vault — shared wallet for multiple cards
 
-Card Vault jest kontraktem przechowującym środki i jednocześnie wspólnym
-adresem odbiorczym portfela. Każda dołączona karta zachowuje własny klucz
-prywatny i własny adres kontrolera. Kontrakt nie przechowuje kluczy kart.
+Card Vault is a contract that holds funds and serves as the wallet's shared
+receiving address. Each attached card retains its own private key and controller
+address. The contract does not store card keys.
 
-Model uprawnień to pełne **1-z-N**, a nie multisig progowy:
+The authorization model is full **one-of-N**, not threshold multisig:
 
-- karta tworząca skarbiec staje się pierwszym członkiem, ale nie otrzymuje
-  roli właściciela ani innych szczególnych uprawnień;
-- każda aktywna karta może samodzielnie przesłać środki ze skarbca, zaprosić
-  kolejną kartę, anulować dowolne oczekujące zaproszenie i usunąć dowolną
-  aktywną kartę, również samą siebie;
-- zaproszona karta musi zaakceptować zaproszenie transakcją podpisaną własnym
-  kluczem;
-- nie można usunąć ostatniej aktywnej karty;
-- zaproszenie należy do całego skarbca, a nie tylko do karty, która je
-  utworzyła.
+- the card that creates the vault becomes its first member but receives no
+  owner role or other special privileges;
+- each active card can independently transfer funds from the vault, invite
+  another card, cancel any pending invitation, and remove any active card,
+  including itself;
+- an invited card must accept the invitation with a transaction signed by its
+  own key;
+- the last active card cannot be removed;
+- an invitation belongs to the entire vault, not only to the card that created
+  it.
 
-Każda aktywna karta otrzymuje finansowany przez skarbiec feegrant ograniczony
-do wiadomości `/cosmwasm.wasm.v1.MsgExecuteContract`. Zaproszony, wcześniej
-nieużywany adres otrzymuje `1 aipi` i ograniczony feegrant potrzebny do
-zaakceptowania zaproszenia. Anulowanie zaproszenia lub usunięcie karty odwołuje
-odpowiadający mu feegrant.
+Each active card receives a vault-funded fee grant restricted to
+`/cosmwasm.wasm.v1.MsgExecuteContract` messages. An invited, previously unused
+address receives `1 aipi` and the restricted fee grant needed to accept the
+invitation. Canceling an invitation or removing a card revokes the corresponding
+fee grant.
 
-Kontrakt przyjmuje przy instancjonowaniu wyłącznie `aipi`; przesłane wtedy
-środki stają się saldem skarbca. Wywołania wykonawcze nie przyjmują dołączonych
-środków. Wartość przelewu musi być dodatnia i jest zawsze wyrażona w `aipi`.
+At instantiation, the contract accepts only `aipi`; any funds sent at that time
+become the vault balance. Execute calls do not accept attached funds. A transfer
+amount must be positive and is always denominated in `aipi`.
 
-### Instancjonowanie
+### Instantiation
 
-Kod powinien mieć uprawnienie instancjonowania `Everybody`, a każdą instancję
-należy tworzyć bez administratora. Komunikat instancjonowania jest pusty:
+The code should have the `Everybody` instantiate permission, and every instance
+must be created without an administrator. The instantiate message is empty:
 
 ```json
 {}
 ```
 
-Nadawca transakcji zostaje pierwszą aktywną kartą. Brak administratora jest
-celowy: uniemożliwia późniejszą podmianę kodu instancji za pomocą migracji.
+The transaction sender becomes the first active card. Omitting an administrator
+is intentional: it prevents the instance code from being replaced later through
+migration.
 
-### Komunikaty wykonawcze
+### Execute messages
 
 ```json
 {"invite_card":{"address":"ipi1..."}}
@@ -136,10 +137,10 @@ celowy: uniemożliwia późniejszą podmianę kodu instancji za pomocą migracji
 {"transfer":{"recipient":"ipi1...","amount":"123"}}
 ```
 
-`amount` jest liczbą całkowitą przekazaną jako tekst. Operacje zaproszenia,
-anulowania, usuwania i przelewu podlegają opisanej wyżej kontroli członkostwa.
+`amount` is an integer encoded as a string. Invitation, cancellation, removal,
+and transfer operations are subject to the membership controls described above.
 
-### Zapytania
+### Queries
 
 ```json
 {"config":{}}
@@ -149,61 +150,61 @@ anulowania, usuwania i przelewu podlegają opisanej wyżej kontroli członkostwa
 {"invitations":{"start_after":null,"limit":30}}
 ```
 
-`config` zwraca nominał i liczbę aktywnych kart. Zapytania pojedyncze zwracają
-członka lub zaproszenie, jeśli istnieje. Listy są stronicowane po adresie;
-domyślny limit wynosi 30, a maksymalny 100.
+`config` returns the denomination and active card count. Single-item queries
+return a member or invitation if it exists. Lists are paginated by address; the
+default limit is 30 and the maximum is 100.
 
-## IPI Payment Relay — pięcioetapowe przekazanie płatności
+## IPI Payment Relay — five-hop payment forwarding
 
-Payment Relay oddziela adres Card Vault od adresu widocznego jako bezpośredni
-nadawca końcowego przelewu bankowego. Dla każdego skarbca portfel tworzy pięć
-osobnych, niezmiennych instancji tego samego kodu, o unikalnych slotach `0..4`.
-Każda instancja jest powiązana z jednym Card Vault, nie przechowuje klucza i po
-prawidłowej płatności nie zatrzymuje salda.
+Payment Relay separates the Card Vault address from the address shown as the
+direct sender of the final bank transfer. For each vault, the wallet creates five
+separate, immutable instances of the same code with unique slots `0..4`. Each
+instance is associated with one Card Vault, stores no key, and retains no balance
+after a valid payment.
 
-Typowa płatność przygotowana przez `ipi-wallet` jest jedną atomową transakcją:
+A typical payment prepared by `ipi-wallet` is a single atomic transaction:
 
-1. Card Vault przekazuje dokładną kwotę do aktywnego kontrolera karty.
-2. Kontroler przekazuje ją do pierwszego z pięciu przekaźników.
-3. Wszystkie pięć przekaźników przekazuje całość w losowej kolejności.
-4. Ostatni przekaźnik wysyła całą kwotę do odbiorcy.
+1. Card Vault transfers the exact amount to an active card controller.
+2. The controller transfers it to the first of five relays.
+3. All five relays forward the full amount in a random order.
+4. The final relay sends the full amount to the recipient.
 
-Pierwszy przekaźnik wymaga dokładnie czterech dalszych, unikalnych instancji.
-Każda z nich musi mieć ten sam `code_id`, nie mieć administratora, należeć do
-tego samego skarbca i reprezentować inny slot. Jeżeli którykolwiek etap się
-nie powiedzie, cała transakcja zostaje wycofana.
+The first relay requires exactly four further unique instances. Each must have
+the same `code_id`, have no administrator, belong to the same vault, and
+represent a different slot. If any stage fails, the entire transaction is rolled
+back.
 
-### Ograniczenie prywatności
+### Privacy limitation
 
-Payment Relay **nie zapewnia kryptograficznej anonimowości** i nie jest
-mikserem. Łańcuch publicznie ujawnia skarbiec, kontroler, kwotę, odbiorcę,
-identyfikator płatności oraz całą trasę. Mechanizm ogranicza jedynie proste,
-bezpośrednie powiązanie adresu skarbca z nadawcą widocznym w podstawowym
-interfejsie odbiorcy. Każdy analizujący dane łańcucha może odtworzyć trasę.
+Payment Relay **does not provide cryptographic anonymity** and is not a mixer.
+The chain publicly reveals the vault, controller, amount, recipient, payment ID,
+and complete route. The mechanism only reduces the simple, direct association
+between the vault address and the sender shown in the recipient's basic
+interface. Anyone analyzing chain data can reconstruct the route.
 
-### Instancjonowanie
+### Instantiation
 
-Artefakt zapisuje się w łańcuchu tylko raz, z uprawnieniem `Everybody`. Dla
-każdego skarbca aktywny kontroler tworzy pięć instancji bez administratora:
+The artifact is stored on-chain only once, with the `Everybody` permission. For
+each vault, an active controller creates five instances without an administrator:
 
 ```json
 {"vault":"ipi1...","slot":0}
 ```
 
-Operację należy powtórzyć dla slotów `1`, `2`, `3` i `4`. Kontrakt odrzuca
-środki podczas instancjonowania, slot spoza zakresu oraz próbę wykonaną przez
-adres, który nie jest aktywnym członkiem wskazanego Card Vault.
+Repeat the operation for slots `1`, `2`, `3`, and `4`. The contract rejects
+funds during instantiation, an out-of-range slot, and any attempt made by an
+address that is not an active member of the specified Card Vault.
 
-Zapytanie konfiguracyjne:
+Configuration query:
 
 ```json
 {"config":{}}
 ```
 
-Powinno zwrócić właściwy `vault`, unikalny `slot`, `denom: "aipi"` oraz
+It should return the correct `vault`, a unique `slot`, `denom: "aipi"`, and
 `relay_count: 5`.
 
-### Przekazanie płatności
+### Payment forwarding
 
 ```json
 {
@@ -216,68 +217,71 @@ Powinno zwrócić właściwy `vault`, unikalny `slot`, `denom: "aipi"` oraz
 }
 ```
 
-Pierwsze wywołanie musi pochodzić od aktywnego kontrolera, zawierać dokładnie
-cztery pozostałe przekaźniki i przenosić dokładnie jedną dodatnią monetę
-`aipi`. `payment_id` musi być 64-znakową, małymi literami zapisaną wartością
-szesnastkową. Kolejne wywołania mogą pochodzić wyłącznie od zgodnych instancji
-przekaźnika. Saldo każdej instancji po prawidłowej płatności powinno wynosić
-zero.
+The first call must come from an active controller, include exactly the other
+four relays, and transfer exactly one positive `aipi` coin. `payment_id` must be
+a 64-character lowercase hexadecimal value. Subsequent calls may only come from
+matching relay instances. The balance of every instance should be zero after a
+valid payment.
 
-## Zarejestrowany stan wdrożeń
+## Recorded deployment status
 
-IPI Card Vault został zweryfikowany na `ipi-testnet-1`:
+IPI Card Vault has been verified on `ipi-testnet-1`:
 
 - `code_id`: `2`;
-- transakcja zapisania kodu:
+- code storage transaction:
   `3116E3BAC8EA64DCDCBE7FAB78B42E75C2DEED63F07A8BD2E71893174832438F`;
-- kontrakt testowy:
+- test contract:
   `ipi1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrq5df8fy`;
-- administrator instancji: brak;
-- SHA-256 kodu w łańcuchu:
+- instance administrator: none;
+- on-chain code SHA-256:
   `fcb5a4653163ca4e3613390bb93c009da1fc49541db21bb11fdea5f64bfec454`.
 
-Payment Relay nie ma w tym repozytorium potwierdzonego wdrożenia na
-`ipi-testnet-1`. Funkcja powinna pozostać wyłączona w aplikacji, dopóki nie
-zostaną zarejestrowane i niezależnie sprawdzone co najmniej: transakcja store,
-on-chain SHA-256, `code_id`, uprawnienie `Everybody`, brak administratora oraz
-pełny test pięciu instancji.
+Payment Relay has no confirmed deployment on `ipi-testnet-1` recorded in this
+repository. The feature should remain disabled in the application until at
+least the following have been recorded and independently verified: the store
+transaction, on-chain SHA-256, `code_id`, `Everybody` permission, absence of an
+administrator, and a complete five-instance test.
 
-Powyższe identyfikatory dotyczą wyłącznie `ipi-testnet-1`. `code_id`, hash
-transakcji ani adres kontraktu nie są przenośne między Testnetem a Mainnetem.
-Wdrożenie Mainnet wymaga ponownego zapisania i sprawdzenia obu artefaktów oraz
-skonfigurowania portfela identyfikatorami uzyskanymi z Mainnetu.
+The identifiers above apply only to `ipi-testnet-1`. A `code_id`, transaction
+hash, or contract address is not portable between Testnet and Mainnet. A Mainnet
+deployment requires storing and verifying both artifacts again and configuring
+the wallet with identifiers obtained from Mainnet.
 
-## Minimalna kontrola wdrożenia
+## Minimum deployment verification
 
-Przed udostępnieniem kontraktu aplikacji operator powinien:
+Before making a contract available to the application, the operator should:
 
-1. użyć zsynchronizowanego węzła oraz osobnego, zasilonego konta operacyjnego;
-2. sprawdzić chain ID, nominał `aipi`, możliwości runtime i lokalne SHA-256;
-3. zapisać dokładnie śledzony w Git artefakt Wasm z uprawnieniem `Everybody`;
-4. poczekać na zatwierdzenie transakcji i potwierdzić kod wykonania `0`;
-5. pobrać informację o kodzie i porównać on-chain SHA-256 z `checksums.txt`;
-6. utworzyć testową instancję bez administratora i sprawdzić jej konfigurację;
-7. dla Card Vault sprawdzić pierwszego członka i ograniczony feegrant;
-8. dla Payment Relay sprawdzić pięć slotów, pełną trasę, zmianę salda odbiorcy
-   o dokładną kwotę i zerowe saldo wszystkich przekaźników;
-9. przekazać aplikacji wyłącznie `code_id` zweryfikowane dla właściwej sieci.
+1. use a synchronized node and a separate, funded operational account;
+2. verify the chain ID, `aipi` denomination, runtime capabilities, and local
+   SHA-256;
+3. store the exact Git-tracked Wasm artifact with the `Everybody` permission;
+4. wait for transaction confirmation and verify execution code `0`;
+5. retrieve the code information and compare the on-chain SHA-256 with
+   `checksums.txt`;
+6. create a test instance without an administrator and verify its configuration;
+7. for Card Vault, verify the first member and restricted fee grant;
+8. for Payment Relay, verify all five slots, the complete route, an exact
+   increase in the recipient's balance, and zero balances on all relays;
+9. provide the application only with `code_id` values verified for the correct
+   network.
 
-Nie należy używać klucza konsensusu walidatora ani wdrażać lokalnie
-przebudowanego, nieśledzonego artefaktu.
+Do not use a validator consensus key or deploy a locally rebuilt, untracked
+artifact.
 
-## Najważniejsze konsekwencje bezpieczeństwa
+## Key security implications
 
-- Utrata jednej aktywnej karty wraz z jej poświadczeniem może oznaczać utratę
-  całego wspólnego salda. Dodanie karty tworzy kolejną pełną ścieżkę autoryzacji.
-- Instancje bez administratora nie mogą zostać zaktualizowane migracją. Nowa
-  wersja wymaga nowego kodu i nowych instancji.
-- Nominał `aipi` jest zapisany w kontraktach na stałe. Zmiana nominału sieci
-  wymaga nowego artefaktu.
-- Dane Payment Relay są jawne i umożliwiają pełne prześledzenie płatności.
-- Przekaźnik nie ma funkcji odzyskania środków. `aipi` wysłane zwykłym przelewem
-  na jego adres zamiast przez `forward` mogą pozostać na nim na stałe.
+- Losing one active card together with its credentials may result in the loss
+  of the entire shared balance. Adding a card creates another complete
+  authorization path.
+- Instances without an administrator cannot be upgraded through migration. A
+  new version requires new code and new instances.
+- The `aipi` denomination is hard-coded in the contracts. Changing the network
+  denomination requires a new artifact.
+- Payment Relay data is public and allows the payment to be traced completely.
+- The relay has no fund recovery function. `aipi` sent to its address through a
+  regular transfer instead of `forward` may remain there permanently.
 
-## Licencja
+## License
 
-Kod i artefakty są własnością IPI. Szczegółowe warunki znajdują się w pliku
-[`LICENSE`](LICENSE).
+The source code and artifacts are licensed under the Apache License 2.0. See
+[`LICENSE`](LICENSE) for details.

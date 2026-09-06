@@ -2,7 +2,7 @@
 name = "ipi-payment-relay"
 version = "0.1.0"
 edition = "2021"
-license-file = "../LICENSE"
+license = "Apache-2.0"
 description = "Transparent zero-retention payment relay for IPI Card Vault"
 
 [lib]
