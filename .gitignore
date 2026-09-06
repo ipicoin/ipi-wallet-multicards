@@ -1,0 +1,6 @@
+/target/
+/card-vault/target/
+/payment-relay/target/
+/artifacts/
+*.log
+.DS_Store

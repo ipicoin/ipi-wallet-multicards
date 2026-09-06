@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">IPI Card Vault</title>
+  <desc id="description">Trzy fizyczne karty IPI połączone z jednym wspólnym skarbcem.</desc>
+  <defs>
+    <linearGradient id="background" x1="68" y1="42" x2="449" y2="474" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1b303b"/>
+      <stop offset=".43" stop-color="#0b151b"/>
+      <stop offset="1" stop-color="#04080b"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="42%" r="65%">
+      <stop stop-color="#59e8a5" stop-opacity=".22"/>
+      <stop offset=".58" stop-color="#1b6a55" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#061014" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rearCard" x1="127" y1="145" x2="310" y2="373" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#416d79"/>
+      <stop offset="1" stop-color="#142b34"/>
+    </linearGradient>
+    <linearGradient id="frontCard" x1="203" y1="150" x2="365" y2="381" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff737e"/>
+      <stop offset=".46" stop-color="#e83e4c"/>
+      <stop offset="1" stop-color="#8d1428"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="211" y1="224" x2="270" y2="276" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff3c4"/>
+      <stop offset=".45" stop-color="#d9b968"/>
+      <stop offset="1" stop-color="#80662d"/>
+    </linearGradient>
+    <linearGradient id="vault" x1="373" y1="311" x2="431" y2="403" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a7ffd1"/>
+      <stop offset="1" stop-color="#39bd82"/>
+    </linearGradient>
+    <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse">
+      <path d="M22 0H0V22" fill="none" stroke="#90ffd0" stroke-width="1" stroke-opacity=".045"/>
+    </pattern>
+    <filter id="shadow" x="-35%" y="-35%" width="170%" height="190%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity=".7"/>
+    </filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect x="13" y="13" width="486" height="486" rx="106" fill="url(#background)"/>
+  <rect x="14.5" y="14.5" width="483" height="483" rx="104.5" fill="none" stroke="#49636e" stroke-opacity=".5" stroke-width="3"/>
+  <rect x="14" y="14" width="484" height="484" rx="105" fill="url(#grid)"/>
+  <circle cx="251" cy="230" r="196" fill="url(#halo)"/>
+  <path d="M79 111C142 47 246 28 344 65" fill="none" stroke="#d5fff0" stroke-opacity=".09" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="89" cy="357" r="3" fill="#62e7a2" opacity=".42"/>
+  <circle cx="424" cy="137" r="4" fill="#ff7581" opacity=".38"/>
+
+  <g filter="url(#shadow)">
+    <g transform="rotate(-17 188 256)">
+      <rect x="91" y="144" width="194" height="238" rx="27" fill="url(#rearCard)" stroke="#456675" stroke-width="4"/>
+      <path d="M112 179h54M112 193h32" stroke="#82f4b7" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+      <circle cx="235" cy="333" r="18" fill="none" stroke="#79e9ad" stroke-width="4" opacity=".5"/>
+      <path d="M224 333l8 8 15-18" fill="none" stroke="#79e9ad" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".72"/>
+    </g>
+
+    <g transform="rotate(14 321 257)">
+      <rect x="221" y="139" width="194" height="238" rx="27" fill="#254650" stroke="#577583" stroke-width="4"/>
+      <rect x="238" y="156" width="160" height="56" rx="14" fill="#193039"/>
+      <path d="M253 178h73M253 192h45" stroke="#ff6a76" stroke-width="5" stroke-linecap="round" opacity=".58"/>
+      <circle cx="366" cy="329" r="18" fill="#f44755" opacity=".82"/>
+      <path d="M359 329h14M366 322v14" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+    </g>
+
+    <g>
+      <rect x="159" y="132" width="194" height="252" rx="29" fill="url(#frontCard)" stroke="#ff8790" stroke-opacity=".62" stroke-width="4"/>
+      <path d="M182 170c36-18 97-21 145 3" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".12"/>
+      <rect x="183" y="216" width="67" height="55" rx="10" fill="url(#chip)" stroke="#ffe5a1" stroke-opacity=".6" stroke-width="2"/>
+      <path d="M205 217v53M228 217v53M184 235h66M184 253h66" stroke="#725b29" stroke-width="3" opacity=".7"/>
+      <text x="184" y="326" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="800" letter-spacing="7">IPI</text>
+      <path d="M286 225c14 0 25 11 25 25M286 235c8 0 15 7 15 15M286 245c3 0 5 2 5 5" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".88"/>
+    </g>
+  </g>
+
+  <g>
+    <path d="M194 395c32 37 92 51 143 27l42-20" fill="none" stroke="#63e5a6" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 13" opacity=".48"/>
+    <circle cx="384" cy="399" r="52" fill="#061014" stroke="#35545d" stroke-width="5"/>
+    <path d="M359 374h50a10 10 0 0 1 10 10v32a10 10 0 0 1-10 10h-50a10 10 0 0 1-10-10v-32a10 10 0 0 1 10-10Z" fill="url(#vault)" filter="url(#glow)"/>
+    <path d="M366 374v-11a18 18 0 0 1 36 0v11" fill="none" stroke="#9cface" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="384" cy="399" r="6" fill="#082117"/>
+    <path d="M384 404v8" stroke="#082117" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <path d="M178 456h156" stroke="#5d7c79" stroke-width="4" stroke-linecap="round" opacity=".33"/>
+  <path d="M217 456h78" stroke="#91efb6" stroke-width="4" stroke-linecap="round" opacity=".72"/>
+</svg>

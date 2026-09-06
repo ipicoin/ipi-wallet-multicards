@@ -1,0 +1,23 @@
+[package]
+name = "ipi-card-vault"
+version = "0.2.0"
+edition = "2021"
+license-file = "../LICENSE"
+description = "One-of-N IPI Card vault for CosmWasm"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+library = []
+
+[dependencies]
+cosmwasm-schema = "2.2.0"
+cosmwasm-std = { version = "2.2.0", features = ["cosmwasm_2_0"] }
+cw-storage-plus = "2.0.0"
+cw2 = "2.0.0"
+prost = "0.14.4"
+thiserror = "1.0.58"
+
+[dev-dependencies]
+cw-multi-test = "2.0.0"
