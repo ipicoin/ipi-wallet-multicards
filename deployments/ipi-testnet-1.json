@@ -1,0 +1,32 @@
+{
+  "network": "ipi-testnet-1",
+  "status": "verified",
+  "source_commit": "0505f9cf3369063c93ed9e63fb8132f4dde8f214",
+  "code_id": "2",
+  "uploader_address": "ipi1l2vqczqpduvtn5jteplzq9vxj2dc793pv6rcrh",
+  "artifact": "artifacts/ipi_card_vault.wasm",
+  "wasm_sha256": "fcb5a4653163ca4e3613390bb93c009da1fc49541db21bb11fdea5f64bfec454",
+  "store_transaction": {
+    "hash": "3116E3BAC8EA64DCDCBE7FAB78B42E75C2DEED63F07A8BD2E71893174832438F",
+    "height": "702657",
+    "timestamp": "2026-09-06T12:01:39Z",
+    "code": 0
+  },
+  "instantiate_permission": "Everybody",
+  "smoke_test": {
+    "transaction_hash": "8EFBAB0E72FE9A555C99D5DBCDCE69B90763F7EDF2990B4F464F97D57295E5F7",
+    "height": "702663",
+    "timestamp": "2026-09-06T12:02:09Z",
+    "transaction_code": 0,
+    "contract_address": "ipi1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrq5df8fy",
+    "admin": null,
+    "denom": "aipi",
+    "member_count": 1,
+    "initial_member": "ipi1l2vqczqpduvtn5jteplzq9vxj2dc793pv6rcrh",
+    "feegrant_granter": "ipi1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrq5df8fy",
+    "feegrant_grantee": "ipi1l2vqczqpduvtn5jteplzq9vxj2dc793pv6rcrh",
+    "feegrant_allowed_messages": [
+      "/cosmwasm.wasm.v1.MsgExecuteContract"
+    ]
+  }
+}

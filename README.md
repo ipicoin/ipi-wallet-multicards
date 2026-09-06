@@ -15,9 +15,11 @@ that deployment.
 
 This is unaudited laboratory software. It must not protect material value.
 
-- **Current target:** `ipi-testnet-1` for integration and physical-card tests.
-- **Current artifact:** `artifacts/ipi_card_vault.wasm` for the Testnet
-  deployment procedure in `SERVER-HANDOFF.md`.
+- **Current target:** deployed on `ipi-testnet-1` as code ID `2` for integration
+  and physical-card tests. The independently verified chain record is in
+  [`deployments/ipi-testnet-1.json`](deployments/ipi-testnet-1.json).
+- **Current artifact:** `artifacts/ipi_card_vault.wasm`, exactly matching the
+  on-chain checksum for code ID `2`.
 - **Mainnet status:** not deployed and not approved. After IPI migrates to
   Mainnet, an operator must validate the final Mainnet runtime, rebuild from an
   audited release, deploy the Wasm through a synchronized Mainnet node server,
@@ -34,6 +36,7 @@ own chain. It must never be copied into the Mainnet wallet configuration.
 | `src/` | CosmWasm membership, transfer and feegrant logic |
 | `artifacts/ipi_card_vault.wasm` | Git-tracked optimized deployment artifact |
 | `artifacts/checksums.txt` | Expected SHA-256 checksum |
+| `deployments/` | Immutable per-network deployment evidence |
 | `SERVER-HANDOFF.md` | Exact Testnet node-operator deployment and verification procedure |
 | `ipi-wallet` repository | Electron UI, physical-card signing and configured `code_id` consumption |
 
@@ -104,8 +107,14 @@ fcb5a4653163ca4e3613390bb93c009da1fc49541db21bb11fdea5f64bfec454
 
 ## Testnet deployment
 
-Follow [`SERVER-HANDOFF.md`](SERVER-HANDOFF.md) from a secured server connected
-to a synchronized `ipi-testnet-1` node. The handoff covers:
+The first deployment completed successfully on 2026-09-06 as code ID `2`.
+[`deployments/ipi-testnet-1.json`](deployments/ipi-testnet-1.json) records the
+source commit, artifact checksum, transaction hashes, smoke contract and
+verified runtime properties.
+
+Follow [`SERVER-HANDOFF.md`](SERVER-HANDOFF.md) when independently checking or
+repeating the procedure from a secured server connected to a synchronized
+`ipi-testnet-1` node. The handoff covers:
 
 1. node, chain, permission, deployer-account and checksum preflight;
 2. `MsgStoreCode` submission and committed transaction verification;

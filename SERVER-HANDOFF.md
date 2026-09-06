@@ -10,6 +10,11 @@ musi zostać ponownie zweryfikowany i zapisany na Mainnecie z serwera noda,
 zgodnie z bramką opisaną w `README.md`. Nie wolno zastępować samych nazw sieci
 w poniższych komendach ani używać testnetowego `code_id` na Mainnecie.
 
+Pierwsze wdrożenie tej procedury zakończyło się powodzeniem 2026-09-06. Kod ma
+`code_id=2`, a pełny zweryfikowany wynik znajduje się w
+`deployments/ipi-testnet-1.json`. Poniższe kroki pozostają procedurą audytową i
+odtwarzalnym handoffem operatorskim.
+
 ## Oczekiwany rezultat
 
 Serwer ma zwrócić pięć wartości:
