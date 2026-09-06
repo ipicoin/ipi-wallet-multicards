@@ -1,9 +1,10 @@
 # IPI Wallet Multicards
 
-`ipi-wallet-multicards` is the standalone CosmWasm contract and deployment
-repository for attaching multiple physical IPI Cards to one shared IPI wallet
-address. Every accepted card has exactly the same one-of-N authority. There are
-no card numbers, primary cards, backup cards or privileged roles.
+`ipi-wallet-multicards` is the standalone CosmWasm and deployment repository
+for shared IPI Card Vaults and their transparent Payment Relay layer. Multiple
+physical IPI Cards attach to one vault address with exactly the same one-of-N
+authority. There are no card numbers, primary cards, backup cards or privileged
+roles.
 
 This repository is not the desktop wallet and it is not a long-running server
 service. It produces a Wasm contract that an operator submits from a secured IPI
@@ -25,6 +26,10 @@ This is unaudited laboratory software. It must not protect material value.
   audited release, deploy the Wasm through a synchronized Mainnet node server,
   run the on-chain smoke tests and configure the wallet with the new Mainnet
   `code_id`.
+- **Payment Relay status:** source and tests are ready in `payment-relay/`, but
+  its Wasm has not yet been stored on `ipi-testnet-1`. Vault relay payments stay
+  disabled until the server deploys the tracked artifact and the wallet is
+  configured with the resulting `IPI_PAYMENT_RELAY_CODE_ID`.
 
 A Testnet `code_id`, transaction hash or contract address is valid only on its
 own chain. It must never be copied into the Mainnet wallet configuration.
@@ -34,10 +39,11 @@ own chain. It must never be copied into the Mainnet wallet configuration.
 | Location | Responsibility |
 | --- | --- |
 | `src/` | CosmWasm membership, transfer and feegrant logic |
+| `payment-relay/` | Five-hop, zero-retention, vault-bound payment relay contract |
 | `artifacts/ipi_card_vault.wasm` | Git-tracked optimized deployment artifact |
 | `artifacts/checksums.txt` | Expected SHA-256 checksum |
 | `deployments/` | Immutable per-network deployment evidence |
-| `SERVER-HANDOFF.md` | Exact Testnet node-operator deployment and verification procedure |
+| `PAYMENT-RELAY-HANDOFF.md` | Exact relay build, store, verification and wallet handoff procedure |
 | `ipi-wallet` repository | Electron UI, physical-card signing and configured `code_id` consumption |
 
 Card firmware, card issuance and the IPI node implementation are outside this
@@ -71,6 +77,34 @@ This is deliberately full one-of-N authority: compromising any one active card
 and its credential can compromise the entire shared balance. Adding a card adds
 another complete authorization path.
 
+## Transparent Payment Relay protocol
+
+Each vault can create one wallet-managed set of five separate relay instances,
+slots `0..4`. Every instance is immutable, stores no key and exposes its bound
+vault through the public `Config {}` query. A relay accepts only one positive
+`aipi` coin, verifies the active vault controller and forwards the entire
+amount. It retains no payment balance.
+
+For a vault payment, `ipi-wallet` signs one atomic transaction containing:
+
+1. a vault execution transferring the exact payment amount to the active card
+   controller;
+2. a controller execution supplying the exact amount to the first relay;
+3. recursive execution through all five relays in a new cryptographically
+   random order;
+4. a final native bank send to the recipient.
+
+The first relay requires exactly four remaining unique slots, so a
+controller-originated route cannot omit a relay. Any failure rolls back the
+whole transaction. Custom `ipi_payment_relay` events disclose the payment ID,
+vault, controller, exact route, recipient and amount.
+
+This is not anonymity. It prevents a basic merchant interface from receiving
+the high-value vault as the immediate bank sender, while leaving the full route
+transparent to explorers, analysts and the sibling `ipi-deanonimizer` tool.
+Anyone capable of reading public chain data can trace it; no privileged tracing
+backdoor exists.
+
 ## Build and verification
 
 Required contract toolchain: Rust 1.85.0 with
@@ -81,6 +115,11 @@ cargo +1.85.0 fmt -- --check
 cargo +1.85.0 clippy --locked --all-targets -- -D warnings
 cargo +1.85.0 test --locked
 cargo +1.85.0 build --locked --release --target wasm32-unknown-unknown
+
+cargo +1.85.0 fmt --manifest-path payment-relay/Cargo.toml -- --check
+cargo +1.85.0 clippy --manifest-path payment-relay/Cargo.toml --locked --all-targets -- -D warnings
+cargo +1.85.0 test --manifest-path payment-relay/Cargo.toml --locked
+cargo +1.85.0 build --manifest-path payment-relay/Cargo.toml --locked --release --target wasm32-unknown-unknown
 ```
 
 Build the reproducible CosmWasm 2.x artifact from the repository root:
@@ -89,7 +128,8 @@ Build the reproducible CosmWasm 2.x artifact from the repository root:
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source=ipi_card_vault_cache,target=/target \
   --mount type=volume,source=ipi_cosmwasm_registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/optimizer:0.16.1
+  --entrypoint sh cosmwasm/optimizer:0.16.1 -c \
+  'rustup toolchain install 1.85.0-x86_64-unknown-linux-musl --profile minimal --target wasm32-unknown-unknown && rustup default 1.85.0-x86_64-unknown-linux-musl && cd /code && /usr/local/bin/optimize.sh .'
 
 cd artifacts
 sha256sum --check checksums.txt
@@ -105,6 +145,16 @@ The currently tracked artifact is 228947 bytes with SHA-256:
 fcb5a4653163ca4e3613390bb93c009da1fc49541db21bb11fdea5f64bfec454
 ```
 
+The Payment Relay has its own lockfile and optimized artifact under
+`payment-relay/`. Build it from that directory with the same optimizer image;
+never deploy an untracked `target/` output.
+
+The tracked Payment Relay artifact is 236954 bytes with SHA-256:
+
+```text
+3ce3c4124544daf100f483110be4c5c9093d4f035fe14259bd2e3ceaef761553
+```
+
 ## Testnet deployment
 
 The first deployment completed successfully on 2026-09-06 as code ID `2`.
@@ -112,9 +162,11 @@ The first deployment completed successfully on 2026-09-06 as code ID `2`.
 source commit, artifact checksum, transaction hashes, smoke contract and
 verified runtime properties.
 
-Follow [`SERVER-HANDOFF.md`](SERVER-HANDOFF.md) when independently checking or
-repeating the procedure from a secured server connected to a synchronized
-`ipi-testnet-1` node. The handoff covers:
+The completed vault deployment can be independently checked against
+[`deployments/ipi-testnet-1.json`](deployments/ipi-testnet-1.json). Follow
+[`PAYMENT-RELAY-HANDOFF.md`](PAYMENT-RELAY-HANDOFF.md) to deploy the additional
+relay code from a secured server connected to a synchronized `ipi-testnet-1`
+node. The handoff covers:
 
 1. node, chain, permission, deployer-account and checksum preflight;
 2. `MsgStoreCode` submission and committed transaction verification;
@@ -175,4 +227,5 @@ recorded and independently verifiable:
 - wallet build configured for the same chain and code ID.
 
 Until that record exists for a network, the multicard feature must remain
-disabled for that network.
+disabled for that network. Relay payments require their own deployment record
+and `IPI_PAYMENT_RELAY_CODE_ID` in addition to the vault code ID.

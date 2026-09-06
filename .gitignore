@@ -1,3 +1,4 @@
 /target/
+/payment-relay/target/
 *.log
 .DS_Store

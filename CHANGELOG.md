@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Added the immutable, zero-retention five-hop Payment Relay contract, tests,
+  optimized checksummed Wasm artifact and server deployment handoff.
+- Documented receiver-balance privacy and full public-chain traceability through
+  `ipi-deanonimizer`.
 - Recorded the successful independently verified `ipi-testnet-1` deployment as
   code ID `2`, including its store transaction and no-admin smoke contract.
 - Added one shared IPI address controlled by fully equal, unnumbered one-of-N
