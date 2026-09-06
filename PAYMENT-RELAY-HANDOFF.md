@@ -11,6 +11,9 @@ after an active physical card reviews and signs the one-time setup.
 The existing vault code ID `2` on `ipi-testnet-1` is unchanged and requires no
 migration. Do not redeploy or migrate existing vault instances.
 
+The reviewed Payment Relay source/artifact commit is
+`8a94bc495f2d536b29208f5ec7a3b03c5176e805`.
+
 ## Preflight
 
 Use a synchronized non-validator operational node and a separate funded
